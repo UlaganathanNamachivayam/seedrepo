@@ -8,15 +8,12 @@ pipeline {
   }
   
   agent any
-  
+	
+  parameters {
+	  string(name: 'useremail', defaultValue: "${env.useremail}", description: 'Candidate email id')
+  }
+	
   stages {
-    stage('Input') {
-           steps {  
-              script {
-		 parameters: [string(defaultValue: "${env.useremail}", description: 'email id', name: 'useremail')]
-              }
-           }
-     }	  
 	  
     stage('Checkout') {
       steps {
