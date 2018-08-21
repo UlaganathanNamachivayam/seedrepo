@@ -1,13 +1,11 @@
 pipeline {
    parameters {
-       string(name: 'user_email', defaultValue: '',
-              description: 'Candidate e-mail address to use.')
+       string(name: 'user_email', defaultValue: '', description: 'Candidate e-mail address to use.')
     }
   environment {
     registry = "coolbud/playground"
     registryCredential = 'playground_docker'
     dockerImage = ''
-	  USER_EMAIL = "${user_email}"
   }
   
   agent any
