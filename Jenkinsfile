@@ -40,7 +40,7 @@ pipeline {
           script {
             dockerImage.pull()
             dockerImage.run('-p 80:80') // {c -> sh 'sleep 2m' }
-		  def _user_email = "${user_email}"
+		  def user_email = "${user_email}"
             // sh "ssh -tt ciuser@localhost && sudo docker run -d -p 80:80 registry:$BUILD_NUMBER"
           }
       }
