@@ -9,20 +9,6 @@ pipeline {
   agent any
   
   stages {
-    stage('BuildVariables') {
-      steps {
-	 script {
-	    def b = build(job: "playground_seed_job ", propagate: false)
-  	     parameters: [
-                            [
-                                $class: 'StringParameterValue',
-                                name: 'user_email',
-                                value: b.buildVariables.user_email
-                            ]
-		      ]
-	      }    
-       	 }
-     }
     stage('Checkout') {
       steps {
         git "${git_url}"
