@@ -13,9 +13,7 @@ pipeline {
     stage('Input') {
            steps {  
               script {
-                  parameters: [string(defaultValue: "${env.useremail}",
-                  description: 'email id',
-                  name: 'useremail')]
+		 parameters: [string(defaultValue: "${env.useremail}", description: 'email id', name: 'useremail')]
               }
            }
      }	  
