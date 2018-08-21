@@ -2,10 +2,12 @@ pipeline {
    //parameters {
      //  string(name: 'user_email', defaultValue: '', description: 'Candidate e-mail address to use.')
     // }
+	
   environment {
     registry = "coolbud/playground"
     registryCredential = 'playground_docker'
     dockerImage = ''
+    def user_email = "${user_email}"
   }
   
   agent any
@@ -40,7 +42,6 @@ pipeline {
           script {
             dockerImage.pull()
             dockerImage.run('-p 80:80') // {c -> sh 'sleep 2m' }
-		  def user_email = "${user_email}"
             // sh "ssh -tt ciuser@localhost && sudo docker run -d -p 80:80 registry:$BUILD_NUMBER"
           }
       }
