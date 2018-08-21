@@ -4,7 +4,7 @@ pipeline {
     registry = "coolbud/playground"
     registryCredential = 'playground_docker'
     dockerImage = ''
-    user_email = "${user_email}"
+    user_email = "ulags.n@gmail.com"
   }
   
   agent any
