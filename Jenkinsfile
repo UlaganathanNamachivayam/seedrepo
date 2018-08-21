@@ -9,7 +9,7 @@ pipeline {
   
   agent any
 	
-	parameters { string(name: 'useremail', defaultValue: "b.buildVariables.useremail" }
+	parameters { string(name: 'useremail', defaultValue: "b.buildVariables.useremail") }
 	
   //parameters {
  //	  string(name: 'useremail', defaultValue: "${env.useremail}", description: 'Candidate email id')
