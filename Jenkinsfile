@@ -1,7 +1,7 @@
 pipeline {
-   parameters {
-       string(name: 'user_email', defaultValue: '', description: 'Candidate e-mail address to use.')
-    }
+   //parameters {
+     //  string(name: 'user_email', defaultValue: '', description: 'Candidate e-mail address to use.')
+    // }
   environment {
     registry = "coolbud/playground"
     registryCredential = 'playground_docker'
