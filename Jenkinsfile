@@ -37,7 +37,7 @@ pipeline {
           script {
             dockerImage.pull()
             // dockerImage.withRun('-p 80:80') {c -> sh 'sleep 2m' }
-            sh 'ssh ciuser@localhost && sudo docker run -d -p 80:80 registry:$BUILD_NUMBER'
+            sh 'ssh -tt ciuser@localhost && sudo docker run -d -p 80:80 registry:$BUILD_NUMBER'
           }
       }
     }
