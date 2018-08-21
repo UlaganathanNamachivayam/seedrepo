@@ -1,19 +1,24 @@
 pipeline {
-  def b = build(job: "playground_seed_job", propagate: false)
-   parameters {
-       string(name: 'user_email', defaultValue: 'b.buildVariables.user_email', description: 'Candidate e-mail address to use.')
-    }	
+  	
   environment {
     registry = "coolbud/playground"
     registryCredential = 'playground_docker'
     dockerImage = ''
-    def user_email = "${user_email}"
   }
   
   agent any
   
   stages {
-    
+    stage('BuildVariables') {
+      steps {
+	 script {
+	    def b = build(job: "playground_seed_job", propagate: false)
+  	    parameters {
+       		string(name: 'user_email', defaultValue: 'b.buildVariables.user_email', description: 'Candidate e-mail address to use.')
+    	    }     
+	  }    
+       }
+    }
     stage('Checkout') {
       steps {
         git "${git_url}"
