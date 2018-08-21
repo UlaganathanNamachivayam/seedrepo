@@ -12,13 +12,17 @@ pipeline {
     stage('BuildVariables') {
       steps {
 	 script {
-	    def b = build(job: "playground_seed_job", propagate: false)
-  	    parameters {
-       		string(name: 'user_email', defaultValue: 'b.buildVariables.user_email', description: 'Candidate e-mail address to use.')
-    	    }     
-	  }    
-       }
-    }
+	    def b = build(job: "playground_seed_job ", propagate: false)
+  	     parameters: [
+                            [
+                                $class: 'StringParameterValue',
+                                name: 'user_email',
+                                value: b.buildVariables.user_email
+                            ]
+		      ]
+	      }    
+       	 }
+     }
     stage('Checkout') {
       steps {
         git "${git_url}"
