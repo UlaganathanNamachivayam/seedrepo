@@ -4,14 +4,16 @@ pipeline {
     registry = "coolbud/playground"
     registryCredential = 'playground_docker'
     dockerImage = ''
-    useremail = "${useremail}"
+    def b = build(job: "playgroud_seed_job", propagate: false)
   }
   
   agent any
 	
-  parameters {
-	  string(name: 'useremail', defaultValue: "${env.useremail}", description: 'Candidate email id')
-  }
+   properties([parameters([string(name: 'useremail', defaultValue: "b.buildVariables.useremail" )])])	
+	
+  //parameters {
+ //	  string(name: 'useremail', defaultValue: "${env.useremail}", description: 'Candidate email id')
+ // }
 	
   stages {
 	  
