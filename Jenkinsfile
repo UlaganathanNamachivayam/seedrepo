@@ -52,7 +52,13 @@ pipeline {
 	  
 	  stage('CommiterEmail'){
        	    steps {
-		  sh "useremail = $(git --no-pager show -s --format='%ae' $GIT_COMMIT)"
+	       script { 
+		       	useremail = sh (
+		        script: 'git --no-pager show -s --format=\'%ae\'',
+	       	        returnStdout: true
+			).trim()       
+	        // sh "useremail = $(git --no-pager show -s --format='%ae' $GIT_COMMIT)"
+	       }
 	    }
 	  }
 	  
