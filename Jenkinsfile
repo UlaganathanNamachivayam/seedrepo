@@ -11,9 +11,9 @@ pipeline {
 	
 	// parameters { string(defaultValue: "${env.useremail}", description: 'email for notifications', name: 'useremail') }
 	
-  parameters {
-	  string(name: 'useremail', defaultValue: "${env.useremail}", description: 'Candidate email id')
-  }
+  //parameters {
+ //	  string(name: 'useremail', defaultValue: "${env.useremail}", description: 'Candidate email id')
+ // }
 	
   stages {
 	  
