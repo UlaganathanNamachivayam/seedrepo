@@ -4,7 +4,7 @@ pipeline {
     registry = "coolbud/playground"
     registryCredential = 'playground_docker'
     dockerImage = ''
-    useremail = "${useremail}"
+    useremail = ""
   }
   
   agent any
@@ -13,7 +13,7 @@ pipeline {
 	
   parameters {
 	  string(name: 'useremail', defaultValue: "${env.useremail}", description: 'Candidate email id')
- // }
+  }
 	
   stages {
 	  
@@ -61,11 +61,7 @@ pipeline {
 			    compressLog: true,
 			    recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
 			     [$class: 'RequesterRecipientProvider']],
-			    replyTo: 'do-not-reply@playground.com', 
-			    subject: "Status: ${currentBuild.result?:'SUCCESS'} - Job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'", 
-			    to: "${env.useremail}"
-		      
-		      
+			    subject: "Status: ${currentBuild.result?:'SUCCESS'} - Job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'"
 		      
 	    } 
          }  
