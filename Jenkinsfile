@@ -73,6 +73,7 @@ pipeline {
 			    compressLog: true,
 			    recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
 			     [$class: 'RequesterRecipientProvider']],
+		            replyTo: 'do-not-reply@playground.com',
 			    subject: "Status: ${currentBuild.result?:'SUCCESS'} - Job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'",
 		            to: useremail
 		      
@@ -87,7 +88,7 @@ pipeline {
 		}
 
 		failure {
-			emailext (recipientProviders: [[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']], to: useremail, subject:"BUILD & DEPLOYMENT FAILURE: ${currentBuild.fullDisplayName}", body: "Build & Deployment Failed! Your commits is suspected to have caused the build failure. Please go to ${BUILD_URL} for details and resolve the build failure at the earliest.", attachLog: false, compressLog: false)
+			emailext (recipientProviders: [[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']], to: useremail, subject:"BUILD & DEPLOYMENT FAILURE: ${currentBuild.fullDisplayName}", body: "Build & Deployment Failed! Your commits is suspected to have caused the build failure. Please go to ${BUILD_URL} for details and resolve the build failure at the earliest.", attachLog: true, compressLog: true)
 			cleanWs()
 		}
 
