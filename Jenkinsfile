@@ -62,9 +62,8 @@ pipeline {
 			    recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
 			     [$class: 'RequesterRecipientProvider']],
 			    replyTo: 'do-not-reply@playground.com', 
-			    subject: "Status: ${currentBuild.result?:'SUCCESS'} - 
-			    Job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'", 
-			 to: "${env.useremail}"
+			    subject: "Status: ${currentBuild.result?:'SUCCESS'} - Job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'", 
+			    to: "${env.useremail}"
 		      
 		      
 		      
