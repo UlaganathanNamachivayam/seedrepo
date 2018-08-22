@@ -4,12 +4,12 @@ pipeline {
     registry = "coolbud/playground"
     registryCredential = 'playground_docker'
     dockerImage = ''
-    def b = build(job: "playgroud_seed_job", propagate: false)
+    useremail = "${useremail}"
   }
   
   agent any
 	
-	parameters { string(name: 'useremail', defaultValue: "b.buildVariables.useremail") }
+	// parameters { string(defaultValue: "${env.useremail}", description: 'email for notifications', name: 'useremail') }
 	
   //parameters {
  //	  string(name: 'useremail', defaultValue: "${env.useremail}", description: 'Candidate email id')
@@ -48,7 +48,29 @@ pipeline {
             // sh "ssh -tt ciuser@localhost && sudo docker run -d -p 80:80 registry:$BUILD_NUMBER"
           }
       }
+	      
     }
+	  stage('BuildResult') {
+	      steps {
+		 script { 
+		      emailext attachLog: true, body:
+			   """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER})\'
+			   </b></p><p>View console output at "<a href="${env.BUILD_URL}"> 
+			   ${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> 
+			     <p><i>(Build log is attached.)</i></p>""", 
+			    compressLog: true,
+			    recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+			     [$class: 'RequesterRecipientProvider']],
+			    replyTo: 'do-not-reply@playground.com', 
+			    subject: "Status: ${currentBuild.result?:'SUCCESS'} - 
+			    Job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'", 
+			 to: "${env.useremail}"
+		      
+		      
+		      
+	    } 
+         }  
+      }
   }
  post {
 		success {
