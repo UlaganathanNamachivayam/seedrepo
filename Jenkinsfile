@@ -47,15 +47,19 @@ pipeline {
             dockerImage.run('-p 80:80') // {c -> sh 'sleep 2m' }
             // sh "ssh -tt ciuser@localhost && sudo docker run -d -p 80:80 registry:$BUILD_NUMBER"
           }
-      }
-	      
+      }  
     }
+	  
+	  stage('CommiterEmail'){
+       	    steps {
+		sh 'useremail = $(git --no-pager show -s --format='%ae' $GIT_COMMIT)'
+	    }
+	  }
+	  
 	  stage('BuildResult') {
 	      steps {
 		 script { 
-		      shell ('useremail = $(git --no-pager show -s --format='%ae' $GIT_COMMIT)')
-			 
-		      emailext attachLog: true, body:
+			emailext attachLog: true, body:
 			   """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER})\'
 			   </b></p><p>View console output at "<a href="${env.BUILD_URL}"> 
 			   ${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> 
