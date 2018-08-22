@@ -53,7 +53,8 @@ pipeline {
 	  stage('BuildResult') {
 	      steps {
 		 script { 
-		      useremail = $(git --no-pager show -s --format='%ae' $GIT_COMMIT)	  
+		      shell ('useremail = $(git --no-pager show -s --format='%ae' $GIT_COMMIT)')
+			 
 		      emailext attachLog: true, body:
 			   """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER})\'
 			   </b></p><p>View console output at "<a href="${env.BUILD_URL}"> 
